@@ -1,0 +1,51 @@
+services:
+  webmail:
+    build: 
+      context: ./webmail
+      dockerfile: dockerfile
+    image: webmail
+    container_name: webmail
+    networks:
+      - projeto-asa
+
+  proxy:
+    build: 
+      context: ./proxy
+      dockerfile: Dockerfile
+    image: proxy
+    container_name: proxy
+    ports:
+      - "80:80"
+    depends_on:
+      - webmail
+    networks:
+      - projeto
+
+  dnsprimario:
+    build:
+      context: ./dns/primario
+      dockerfile: Dockerfile
+    image: dnsprimario
+    container_name: dnsprimario
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+    networks:
+      - projeto-asa
+
+  dnssecundario:
+    build:
+      context: ./dns/secundario
+      dockerfile: Dockerfile
+    image: dnssecundario
+    container_name: dnssecundario
+    ports:
+      - "5353:53/tcp"
+      - "5353:53/udp"
+    networks:
+      - projeto-asa
+
+
+networks:
+  projeto-asa:
+    driver: bridge
