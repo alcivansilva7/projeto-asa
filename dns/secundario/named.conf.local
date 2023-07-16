@@ -1,0 +1,15 @@
+zone "asa.br"{
+    type slave;
+    file "/var/lib/bind/db.asa.br";
+    masters{
+       192.168.80.108; //alterar o IP para o da máquina real
+    };
+};
+//alterar o IP reverso para o reverso da máquina real
+zone "80.168.192.in-addr.arpa"{
+    type slave;
+    file "/var/lib/bind/rv.db.asa.br";
+    masters{
+        192.168.80.108; //alterar o IP para o da máquina real
+    };
+};

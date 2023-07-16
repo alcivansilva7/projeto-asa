@@ -1,0 +1,13 @@
+@   IN  SOA ns1.asa.br. admin.asa.br. (
+            2023010101 ; Serial
+            3H ; Refresh
+            1H ; Retry
+            1W ; Expire
+            1D ; Minimum TTL
+)
+@   IN  MX  10 mail.asa.br.
+@   IN  NS      ns1.asa.br.
+
+108  IN  PTR ns1.asa.br.
+108  IN  PTR mail.asa.br.
+108  IN  PTR www.asa.br.

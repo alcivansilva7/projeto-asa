@@ -1,0 +1,15 @@
+zone "asa.br"{
+    type master;
+    file "/etc/bind/db.asa.br";
+    allow-transfer{
+       any;
+    };
+};
+//alterar o IP reverso para o reverso da máquina real
+zone "80.168.192.in-addr.arpa"{
+    type master;
+    file "/etc/bind/rv.db.asa.br";
+    allow-transfer{
+        any;
+    };
+};
