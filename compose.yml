@@ -2,7 +2,7 @@ services:
   webmail:
     build: 
       context: ./webmail
-      dockerfile: dockerfile
+      dockerfile: Dockerfile
     image: webmail
     container_name: webmail
     networks:
@@ -19,7 +19,7 @@ services:
     depends_on:
       - webmail
     networks:
-      - projeto
+      - projeto-asa
 
   dnsprimario:
     build:
@@ -28,8 +28,8 @@ services:
     image: dnsprimario
     container_name: dnsprimario
     ports:
-      - "53:53/tcp"
       - "53:53/udp"
+      - "53:53/tcp"
     networks:
       - projeto-asa
 
@@ -40,8 +40,8 @@ services:
     image: dnssecundario
     container_name: dnssecundario
     ports:
-      - "5353:53/tcp"
       - "5353:53/udp"
+      - "5353:53/tcp"
     networks:
       - projeto-asa
 
