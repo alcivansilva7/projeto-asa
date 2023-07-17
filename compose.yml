@@ -1,4 +1,30 @@
 services:
+  banco:
+    image: mysql:latest
+    volumes:
+      - db-data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
+    networks:
+      - projeto-asa
+  
+  wordpress:
+    image: wordpress:latest
+    container_name: wordpress
+    environment:
+      WORDPRESS_DB_HOST: banco:3306
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+    expose:
+      - "80"
+    depends_on:
+      - banco
+    networks:
+      - projeto-asa
+
   webmail:
     build: 
       context: ./webmail
@@ -18,6 +44,7 @@ services:
       - "80:80"
     depends_on:
       - webmail
+      - wordpress
     networks:
       - projeto-asa
 
@@ -40,12 +67,13 @@ services:
     image: dnssecundario
     container_name: dnssecundario
     ports:
-      - "5353:53/udp"
-      - "5353:53/tcp"
+      - "54:53/udp"
+      - "54:53/tcp"
     networks:
       - projeto-asa
-
 
 networks:
   projeto-asa:
     driver: bridge
+volumes:
+  db-data:
