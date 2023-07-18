@@ -13,13 +13,24 @@ services:
       - "3306:3306"
     networks:
       - projeto-asa
-  
+    
   portal:
     build:
       context: ./portal
       dockerfile: Dockerfile
     image: portal
     container_name: portal
+    depends_on:
+      - banco
+    networks:
+      - projeto-asa
+
+  portalintranet:
+    build:
+      context: ./portalintranet
+      dockerfile: Dockerfile
+    image: portalintranet
+    container_name: portalintranet
     depends_on:
       - banco
     networks:
