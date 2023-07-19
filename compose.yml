@@ -7,8 +7,13 @@ services:
     container_name: mysql
     volumes:
       - db-data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
     ports:
-      - "3307:3306"
+      - "3306:3306"
     networks:
       - projeto-asa
     
@@ -23,12 +28,12 @@ services:
     networks:
       - projeto-asa
 
-  portalintranet:
+  intranet:
     build:
-      context: ./portalintranet
+      context: ./intranet
       dockerfile: Dockerfile
-    image: portalintranet
-    container_name: portalintranet
+    image: intranet
+    container_name: intranet
     depends_on:
       - banco
     networks:
@@ -52,6 +57,7 @@ services:
     ports:
       - "80:80"
     depends_on:
+      - intranet
       - webmail
       - portal
     networks:

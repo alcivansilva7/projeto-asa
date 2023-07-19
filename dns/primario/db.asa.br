@@ -6,14 +6,14 @@
             1D ; Minimum TTL
 )
 
-@   IN  NS      ns1.asa.br.
 
 @   IN  MX  10 mail.asa.br.
-@   IN  A     ns1.asa.br.
+@   IN  NS      ns1.asa.br.
 
-ns1     IN  A   10.24.18.5 ;alterar IPs para a máquina local
-mail    IN  A   10.24.18.5
-www     IN  A   10.24.18.5
+
+ns1     IN  A  192.168.80.108 ;alterar IPs para a máquina local
+mail    IN  A  192.168.80.108
+www     IN  A  192.168.80.108
 
 smtp    IN  CNAME   mail
 imap    IN  CNAME   mail
