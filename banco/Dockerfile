@@ -1,10 +1,9 @@
 FROM mysql:latest
 
-RUN mysql -uroot -proot -e "CREATE DATABASE wordpress;"
-RUN mysql -uroot -proot -e "CREATE USER 'wordpress'@'localhost' IDENTIFIED BY 'wordpress';"
-RUN mysql -uroot -proot -e "GRANT ALL PRIVILEGES ON * . * TO 'wordpress'@'localhost';"
-RUN mysql -uroot -proot -e "FLUSH PRIVILEGES;"
-RUN mysql -uroot -proot -e "CREATE DATABASE intranet;"
-RUN mysql -uroot -proot -e "CREATE USER 'intranet'@'localhost' IDENTIFIED BY 'intranet';"
-RUN mysql -uroot -proot -e "GRANT ALL PRIVILEGES ON * . * TO 'intranet'@'localhost';"
-RUN mysql -uroot -proot -e "FLUSH PRIVILEGES;"
+ENV MYSQL_ROOT_PASSWORD=root
+ENV MYSQL_DATABASE=wordpress
+ENV MYSQL_USER=wordpress
+ENV MYSQL_PASSWORD=wordpress
+
+COPY iniciar.sh /docker-entrypoint-initdb.d
+RUN chmod 755 /docker-entrypoint-initdb.d/iniciar.sh

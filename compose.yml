@@ -1,16 +1,14 @@
 services:
   banco:
-    image: mysql:latest
+    build: 
+      context: ./banco
+      dockerfile: Dockerfile
+    image: mysql
     container_name: mysql
     volumes:
       - db-data:/var/lib/mysql
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: wordpress
-      MYSQL_USER: wordpress
-      MYSQL_PASSWORD: wordpress
     ports:
-      - "3306:3306"
+      - "3307:3306"
     networks:
       - projeto-asa
     
