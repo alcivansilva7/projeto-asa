@@ -23,6 +23,8 @@ services:
       dockerfile: Dockerfile
     image: portal
     container_name: portal
+    volumes:
+      - portal:/var/www/html
     depends_on:
       - banco
     networks:
@@ -34,6 +36,8 @@ services:
       dockerfile: Dockerfile
     image: intranet
     container_name: intranet
+    volumes:
+      - intranet:/var/www/html
     depends_on:
       - banco
     networks:
@@ -48,6 +52,14 @@ services:
     networks:
       - projeto-asa
 
+  nextcloud:
+    image: nextcloud:latest
+    container_name: nextcloud
+    volumes:
+      - nextcloud:/var/www/html
+    networks:
+      - projeto-asa
+
   proxy:
     build: 
       context: ./proxy
@@ -57,6 +69,7 @@ services:
     ports:
       - "80:80"
     depends_on:
+      - nextcloud
       - intranet
       - webmail
       - portal
@@ -92,3 +105,6 @@ networks:
     driver: bridge
 volumes:
   db-data:
+  nextcloud:
+  portal:
+  intranet:
