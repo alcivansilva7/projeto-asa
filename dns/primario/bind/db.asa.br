@@ -22,3 +22,5 @@ pop     IN  CNAME   mail
 portal      IN  CNAME   www
 intranet    IN  CNAME   www
 webmail     IN  CNAME   www
+nextcloud   IN  CNAME   www
+glpi        IN  CNAME   www

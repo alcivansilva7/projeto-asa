@@ -49,11 +49,44 @@ services:
       dockerfile: Dockerfile
     image: webmail
     container_name: webmail
+    volumes:
+      - webmail:/var/www/html
+    networks:
+      - projeto-asa
+
+  email:
+    build:
+      context: ./email
+      dockerfile: Dockerfile
+    image: email
+    container_name: email
+    volumes:
+      - postfix:/etc/postfix
+      - dovecot:/etc/dovecot/conf.d
+    ports:
+      - "25:25/tcp"
+      - "587:587/tcp"
+      - "110:110/tcp"
+      - "143:143/tcp"   
+    networks:
+      - projeto-asa 
+
+  glpi:
+    image: diouxx/glpi
+    container_name: glpi
+    volumes:
+      - glpi2:/etc/
+      - glpi:/var/www/html/glpi
+    environment:
+      - TIMEZONE=America/Recife
     networks:
       - projeto-asa
 
   nextcloud:
-    image: nextcloud:latest
+    build:
+      context: ./nextcloud
+      dockerfile: Dockerfile
+    image: nextcloud
     container_name: nextcloud
     volumes:
       - nextcloud:/var/www/html
@@ -69,6 +102,7 @@ services:
     ports:
       - "80:80"
     depends_on:
+      - glpi
       - nextcloud
       - intranet
       - webmail
@@ -108,3 +142,8 @@ volumes:
   nextcloud:
   portal:
   intranet:
+  webmail:
+  glpi2:
+  glpi:
+  postfix:
+  dovecot:
