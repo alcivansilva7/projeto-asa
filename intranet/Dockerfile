@@ -14,6 +14,7 @@ RUN rm /var/www/html/index.html
 RUN unzip latest-pt_BR.zip -d /var/www/html/
 RUN mv /var/www/html/wordpress/* /var/www/html/
 RUN rmdir /var/www/html/wordpress
+COPY ./html/* /var/www/html
 RUN chown -R www-data:www-data /var/www/html/ && \
 chmod -R 755 /var/www/html/
 
