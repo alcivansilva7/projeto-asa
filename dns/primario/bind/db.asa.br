@@ -11,9 +11,9 @@
 @   IN  NS      ns1.asa.br.
 
 
-ns1     IN  A  192.168.80.108 ;alterar IPs para a máquina local
-mail    IN  A  192.168.80.108
-www     IN  A  192.168.80.108
+ns1     IN  A  10.25.1.160 ;alterar IPs para a máquina local
+mail    IN  A  10.25.1.160
+www     IN  A  10.25.1.160
 
 smtp    IN  CNAME   mail
 imap    IN  CNAME   mail

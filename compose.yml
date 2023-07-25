@@ -13,7 +13,7 @@ services:
       MYSQL_USER: portal
       MYSQL_PASSWORD: portal
     ports:
-      - "3306:3306"
+      - "3307:3306"
     networks:
       - projeto-asa
     
